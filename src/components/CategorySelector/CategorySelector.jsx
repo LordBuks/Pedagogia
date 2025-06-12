@@ -5,7 +5,13 @@ import './CategorySelector.css';
 const CategorySelector = () => {
   const { selectedCategory, setSelectedCategory } = useAthletes();
   
-  const categories = ['Sub 14', 'Sub 15', 'Sub 16', 'Sub 17', 'Sub 20'];
+  const categories = [
+    'Turno Manhã - Escola São Francisco', 
+    'Turno Manhã - Escola Estadual Padre Léo', 
+    'Turno Noite - Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso', 
+    'Turno Noite - Escola Estadual de Educação Básica Júlio César Ribeiro de Souza', 
+    'Turno Noite - E.M.E.F. Professor Juliano Nascimento'
+  ];
 
   return (
     <div className="category-selector">

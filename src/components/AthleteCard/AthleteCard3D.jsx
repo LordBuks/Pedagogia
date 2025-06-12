@@ -12,8 +12,8 @@ const AthleteCard3D = ({ athlete, onCardClick, onDeleteAthlete }) => {
   };
 
   const calculateAverageRating = () => {
-    if (!athlete.behavior || !athlete.commitment || !athlete.school) return 0;
-    const average = (athlete.behavior + athlete.commitment + athlete.school) / 3;
+    if (!athlete.evaluation || !athlete.evaluation.comportamento || !athlete.evaluation.compromisso || !athlete.evaluation.escola) return 0;
+    const average = (athlete.evaluation.comportamento + athlete.evaluation.compromisso + athlete.evaluation.escola) / 3;
     return average.toFixed(1);
   };
 

@@ -12,14 +12,14 @@ export const useAthletes = () => {
 
 export const AthleteProvider = ({ children }) => {
   const [athletes, setAthletes] = useState({
-    'Sub 14': [],
-    'Sub 15': [],
-    'Sub 16': [],
-    'Sub 17': [],
-    'Sub 20': []
+    'Turno Manhã - Escola São Francisco': [],
+    'Turno Manhã - Escola Estadual Padre Léo': [],
+    'Turno Noite - Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso': [],
+    'Turno Noite - Escola Estadual de Educação Básica Júlio César Ribeiro de Souza': [],
+    'Turno Noite - E.M.E.F. Professor Juliano Nascimento': []
   });
   
-  const [selectedCategory, setSelectedCategory] = useState('Sub 14');
+  const [selectedCategory, setSelectedCategory] = useState('Turno Manhã - Escola São Francisco');
 
   // Carregar dados do localStorage
   useEffect(() => {

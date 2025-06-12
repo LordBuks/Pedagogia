@@ -34,8 +34,8 @@ const AthleteDetailsModal3D = ({ athlete, category, onClose }) => {
         <div className="modal-content-3d">
           <div className="athlete-details-left">
             <div className="athlete-header">
-              <h1 className="athlete-name-large">{athlete.name || 'Nome do Atleta'}</h1>
-              <span className="athlete-category">{category}</span>
+              <h1 className="athlete-name-large">{athlete.fullName || athlete.name || 'Nome do Atleta'}</h1>
+              <span className="athlete-birth-year">{athlete.birthDate ? new Date(athlete.birthDate).getFullYear() : 'Ano não informado'}</span>
             </div>
             
             <div className="athlete-info-grid">

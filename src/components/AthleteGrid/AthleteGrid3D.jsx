@@ -11,7 +11,11 @@ const AthleteGrid3D = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [selectedAthlete, setSelectedAthlete] = useState(null);
   
-  const athletes = getAthletesByCategory(selectedCategory);
+  const athletes = getAthletesByCategory(selectedCategory).sort((a, b) => {
+    const nameA = (a.name || '').toLowerCase();
+    const nameB = (b.name || '').toLowerCase();
+    return nameA.localeCompare(nameB);
+  });
 
   const handleCardClick = (athlete) => {
     setSelectedAthlete(athlete);

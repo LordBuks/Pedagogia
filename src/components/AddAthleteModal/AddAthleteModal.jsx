@@ -37,6 +37,14 @@ const AddAthleteModal = ({ category, onClose }) => {
     'Centroavante'
   ];
 
+  const schools = [
+    { name: 'Escola São Francisco', period: 'Manhã' },
+    { name: 'Escola Estadual Padre Léo', period: 'Manhã' },
+    { name: 'Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso', period: 'Noite' },
+    { name: 'Escola Estadual de Educação Básica Júlio César Ribeiro de Souza', period: 'Noite' },
+    { name: 'E.M.E.F. Professor Juliano Nascimento', period: 'Noite' }
+  ];
+
   const schoolYears = [
     '6º Ano EF',
     '7º Ano EF',
@@ -224,12 +232,23 @@ const AddAthleteModal = ({ category, onClose }) => {
 
               <div className="form-group">
                 <label>Escola que Estuda *</label>
-                <input
-                  type="text"
+                <select
                   name="school"
                   value={formData.school}
                   onChange={handleInputChange}
-                />
+                >
+                  <option value="">Selecione uma escola</option>
+                  <optgroup label="Turno Manhã">
+                    {schools.filter(school => school.period === 'Manhã').map(school => (
+                      <option key={school.name} value={school.name}>{school.name}</option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="Turno Noite">
+                    {schools.filter(school => school.period === 'Noite').map(school => (
+                      <option key={school.name} value={school.name}>{school.name}</option>
+                    ))}
+                  </optgroup>
+                </select>
               </div>
 
               <div className="form-group">
