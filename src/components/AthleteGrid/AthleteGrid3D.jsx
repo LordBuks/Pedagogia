@@ -17,6 +17,30 @@ const AthleteGrid3D = () => {
     return nameA.localeCompare(nameB);
   });
 
+  // Mapeamento de categorias para exibir apenas o nome da escola sem o turno
+  const categoryMap = {
+    'Turno Manhã - Escola São Francisco': {
+      displayName: 'Escola São Francisco',
+      turno: 'Manhã'
+    },
+    'Turno Manhã - Escola Estadual Padre Léo': {
+      displayName: 'Escola Estadual Padre Léo',
+      turno: 'Manhã'
+    },
+    'Turno Noite - Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso': {
+      displayName: 'Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso',
+      turno: 'Noite'
+    },
+    'Turno Noite - Escola Estadual de Educação Básica Júlio César Ribeiro de Souza': {
+      displayName: 'Escola Estadual de Educação Básica Júlio César Ribeiro de Souza',
+      turno: 'Noite'
+    },
+    'Turno Noite - E.M.E.F. Professor Juliano Nascimento': {
+      displayName: 'E.M.E.F. Professor Juliano Nascimento',
+      turno: 'Noite'
+    }
+  };
+
   const handleCardClick = (athlete) => {
     setSelectedAthlete(athlete);
   };
@@ -36,7 +60,10 @@ const AthleteGrid3D = () => {
   return (
     <div className="athlete-grid-container-3d">
       <div className="grid-header-3d">
-        <h2 className="category-title-3d">{selectedCategory}</h2>
+        <div className="category-header">
+          <h2 className="category-title-3d">{categoryMap[selectedCategory].displayName}</h2>
+          <span className="category-turno-badge">{categoryMap[selectedCategory].turno}</span>
+        </div>
         <p className="athletes-count-3d">
           {athletes.length} {athletes.length === 1 ? 'atleta' : 'atletas'} cadastrado{athletes.length === 1 ? '' : 's'}
         </p>
@@ -72,7 +99,7 @@ const AthleteGrid3D = () => {
               </div>
               <h3 className="add-card-title">Adicionar Atleta</h3>
               <p className="add-card-subtitle">
-                Clique para cadastrar um novo atleta na categoria {selectedCategory}
+                Clique para cadastrar um novo atleta na categoria {categoryMap[selectedCategory].displayName}
               </p>
             </div>
           </div>

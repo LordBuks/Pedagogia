@@ -134,6 +134,7 @@
 body {
   background: var(--inter-white);
   min-height: 100vh;
+  font-family: 'Poppins', 'Roboto', 'Segoe UI', sans-serif;
 }
 
 .App {
@@ -281,17 +282,20 @@ body {
 }
 
 .nav-button {
-  padding: 12px 30px;
+  padding: 14px 32px;
   border: 2px solid #E30613;
   background: white;
   color: #E30613;
-  border-radius: 25px;
+  border-radius: 30px;
   font-weight: 600;
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  min-width: 180px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(227, 6, 19, 0.1);
 }
 
 .nav-button:hover {
@@ -316,8 +320,74 @@ body {
   
   .nav-button {
     width: 200px;
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 14px;
   }
+}
+
+/* Estilos para o botão de adicionar atleta */
+.add-athlete-card-3d {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  height: 280px;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  animation: fadeInScale 0.5s ease-out forwards;
+}
+
+.add-athlete-card-3d:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(220, 20, 60, 0.15);
+}
+
+.add-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  text-align: center;
+  border: 2px dashed rgba(220, 20, 60, 0.3);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.add-icon-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--inter-red-light) 0%, var(--inter-red) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: white;
+  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.3);
+  transition: all 0.3s ease;
+}
+
+.add-athlete-card-3d:hover .add-icon-container {
+  transform: scale(1.1) rotate(90deg);
+}
+
+.add-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--inter-red);
+  margin-bottom: 0.5rem;
+}
+
+.add-card-subtitle {
+  font-size: 0.9rem;
+  color: var(--inter-gray-medium);
+  line-height: 1.4;
 }
 

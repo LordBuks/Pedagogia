@@ -23,10 +23,23 @@ export const AthleteProvider = ({ children }) => {
 
   // Carregar dados do localStorage
   useEffect(() => {
-    const savedAthletes = localStorage.getItem('internacional-athletes');
+    const savedAthletes = localStorage.getItem("internacional-athletes");
     if (savedAthletes) {
-      console.log("Carregando atletas do localStorage:", JSON.parse(savedAthletes));
-      setAthletes(JSON.parse(savedAthletes));
+      try {
+        const parsedAthletes = JSON.parse(savedAthletes);
+        // Garante que o valor seja um objeto e não um array diretamente, para evitar o erro de iteração
+        if (typeof parsedAthletes === 'object' && parsedAthletes !== null) {
+          setAthletes(parsedAthletes);
+        } else {
+          console.error("Dados inválidos no localStorage, inicializando com objeto vazio.");
+          setAthletes({});
+        }
+      } catch (e) {
+        console.error("Erro ao analisar JSON do localStorage:", e);
+        setAthletes({}); // Inicializa com um objeto vazio em caso de erro de parsing
+      }
+    } else {
+      setAthletes({}); // Inicializa com um objeto vazio se não houver dados salvos
     }
   }, []);
 

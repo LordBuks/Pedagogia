@@ -33,25 +33,34 @@
 .logo-section {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .logo-placeholder {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.logo-placeholder:hover {
+  transform: scale(1.05) rotate(5deg);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .logo-text {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
   color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .title-section {
@@ -59,17 +68,19 @@
 }
 
 .main-title {
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 2.2rem;
+  font-weight: 800;
   margin: 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
 }
 
 .subtitle {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin: 0.25rem 0 0 0;
   opacity: 0.9;
-  font-weight: 300;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 }
 
 @media (max-width: 768px) {
@@ -78,7 +89,7 @@
   }
   
   .main-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
   
   .subtitle {
@@ -86,12 +97,12 @@
   }
   
   .logo-placeholder {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
   }
   
   .logo-text {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 }
 

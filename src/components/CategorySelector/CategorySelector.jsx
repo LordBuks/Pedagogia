@@ -5,6 +5,30 @@ import './CategorySelector.css';
 const CategorySelector = () => {
   const { selectedCategory, setSelectedCategory } = useAthletes();
   
+  // Mapeamento de categorias para exibir apenas o nome da escola sem o turno
+  const categoryMap = {
+    'Turno Manhã - Escola São Francisco': {
+      displayName: 'Escola São Francisco',
+      turno: 'Manhã'
+    },
+    'Turno Manhã - Escola Estadual Padre Léo': {
+      displayName: 'Escola Estadual Padre Léo',
+      turno: 'Manhã'
+    },
+    'Turno Noite - Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso': {
+      displayName: 'Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso',
+      turno: 'Noite'
+    },
+    'Turno Noite - Escola Estadual de Educação Básica Júlio César Ribeiro de Souza': {
+      displayName: 'Escola Estadual de Educação Básica Júlio César Ribeiro de Souza',
+      turno: 'Noite'
+    },
+    'Turno Noite - E.M.E.F. Professor Juliano Nascimento': {
+      displayName: 'E.M.E.F. Professor Juliano Nascimento',
+      turno: 'Noite'
+    }
+  };
+
   const categories = [
     'Turno Manhã - Escola São Francisco', 
     'Turno Manhã - Escola Estadual Padre Léo', 
@@ -22,7 +46,8 @@ const CategorySelector = () => {
             className={`category-tab ${selectedCategory === category ? 'active' : ''}`}
             onClick={() => setSelectedCategory(category)}
           >
-            <span className="category-text">{category}</span>
+            <span className="category-text">{categoryMap[category].displayName}</span>
+            <span className="category-turno">{categoryMap[category].turno}</span>
           </button>
         ))}
       </div>
