@@ -130,10 +130,15 @@
   --inter-gray-dark: #374151;
 }
 
-/* Estilos globais para o tema do Internacional */
+/* Atualização do background para melhor integração com o design 3D */
 body {
-  background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   min-height: 100vh;
+}
+
+.App {
+  min-height: 100vh;
+  background: transparent;
 }
 
 /* Efeitos 3D e animações */

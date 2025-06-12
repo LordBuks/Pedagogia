@@ -2,7 +2,7 @@ import React from 'react';
 import { AthleteProvider } from './context/AthleteContext';
 import Header from './components/Header/Header';
 import CategorySelector from './components/CategorySelector/CategorySelector';
-import AthleteGrid from './components/AthleteGrid/AthleteGrid';
+import AthleteGrid3D from './components/AthleteGrid/AthleteGrid3D';
 import './App.css';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <div className="App geometric-pattern">
         <Header />
         <CategorySelector />
-        <AthleteGrid />
+        <AthleteGrid3D />
       </div>
     </AthleteProvider>
   );
