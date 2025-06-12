@@ -52,22 +52,37 @@ export const AthleteProvider = ({ children }) => {
     });
   };
 
-  const updateAthlete = (category, athleteId, updatedData) => {
-    setAthletes(prev => ({
-      ...prev,
-      [category]: prev[category].map(athlete => 
-        athlete.id === athleteId 
-          ? { ...athlete, ...updatedData, updatedAt: new Date().toISOString() }
-          : athlete
-      )
-    }));
+  const updateAthlete = (updatedAthlete) => {
+    setAthletes(prev => {
+      const newState = { ...prev };
+      
+      // Encontrar em qual categoria o atleta está
+      for (const category in newState) {
+        const athleteIndex = newState[category].findIndex(athlete => athlete.id === updatedAthlete.id);
+        if (athleteIndex !== -1) {
+          newState[category][athleteIndex] = { 
+            ...updatedAthlete, 
+            updatedAt: new Date().toISOString() 
+          };
+          break;
+        }
+      }
+      
+      return newState;
+    });
   };
 
-  const deleteAthlete = (category, athleteId) => {
-    setAthletes(prev => ({
-      ...prev,
-      [category]: prev[category].filter(athlete => athlete.id !== athleteId)
-    }));
+  const deleteAthlete = (athleteId) => {
+    setAthletes(prev => {
+      const newState = { ...prev };
+      
+      // Encontrar em qual categoria o atleta está e removê-lo
+      for (const category in newState) {
+        newState[category] = newState[category].filter(athlete => athlete.id !== athleteId);
+      }
+      
+      return newState;
+    });
   };
 
   const getAthletesByCategory = (category) => {

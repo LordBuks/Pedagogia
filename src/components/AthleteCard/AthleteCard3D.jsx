@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
-import { Calendar, MapPin, User } from 'lucide-react';
+import { Calendar, MapPin, User, Trash2, Trophy } from 'lucide-react';
 import './AthleteCard3D.css';
 
-const AthleteCard3D = ({ athlete, onCardClick }) => {
+const AthleteCard3D = ({ athlete, onCardClick, onDeleteAthlete }) => {
   const [imageError, setImageError] = useState(false);
 
   const formatDate = (dateString) => {
     if (!dateString) return '';
     const date = new Date(dateString);
     return date.toLocaleDateString('pt-BR');
+  };
+
+  const calculateAverageRating = () => {
+    if (!athlete.behavior || !athlete.commitment || !athlete.school) return 0;
+    const average = (athlete.behavior + athlete.commitment + athlete.school) / 3;
+    return average.toFixed(1);
+  };
+
+  const handleDeleteClick = (e) => {
+    e.stopPropagation(); // Previne que o clique no botão delete abra o card
+    if (window.confirm(`Tem certeza que deseja deletar o atleta ${athlete.name}?`)) {
+      onDeleteAthlete(athlete.id);
+    }
   };
 
   return (
@@ -18,6 +31,14 @@ const AthleteCard3D = ({ athlete, onCardClick }) => {
           <div className="geometric-pattern"></div>
           <div className="inter-logo"></div>
         </div>
+        
+        <button 
+          className="delete-button"
+          onClick={handleDeleteClick}
+          title="Deletar atleta"
+        >
+          <Trash2 size={16} />
+        </button>
         
         <div className="card-content">
           <div className="athlete-photo-container">
@@ -43,6 +64,10 @@ const AthleteCard3D = ({ athlete, onCardClick }) => {
               <Calendar size={14} />
               {formatDate(athlete.birthDate) || 'DATA DE NASCIMENTO'}
             </p>
+            <div className="athlete-rating">
+              <Trophy size={14} />
+              <span>Média: {calculateAverageRating()}/5</span>
+            </div>
           </div>
           
           <div className="card-decorations">

@@ -3,11 +3,11 @@ import { Plus } from 'lucide-react';
 import { useAthletes } from '../../context/AthleteContext';
 import AthleteCard3D from '../AthleteCard/AthleteCard3D';
 import AddAthleteModal from '../AddAthleteModal/AddAthleteModal';
-import AthleteDetailsModal3D from '../AthleteDetailsModal/AthleteDetailsModal3D';
+import AthleteDetailsPage from '../AthleteDetailsPage/AthleteDetailsPage';
 import './AthleteGrid3D.css';
 
 const AthleteGrid3D = () => {
-  const { selectedCategory, getAthletesByCategory } = useAthletes();
+  const { selectedCategory, getAthletesByCategory, deleteAthlete, updateAthlete } = useAthletes();
   const [showAddModal, setShowAddModal] = useState(false);
   const [selectedAthlete, setSelectedAthlete] = useState(null);
   
@@ -17,8 +17,16 @@ const AthleteGrid3D = () => {
     setSelectedAthlete(athlete);
   };
 
-  const handleCloseDetailsModal = () => {
+  const handleCloseDetailsPage = () => {
     setSelectedAthlete(null);
+  };
+
+  const handleDeleteAthlete = (athleteId) => {
+    deleteAthlete(athleteId);
+  };
+
+  const handleUpdateAthlete = (updatedAthlete) => {
+    updateAthlete(updatedAthlete);
   };
 
   return (
@@ -40,6 +48,7 @@ const AthleteGrid3D = () => {
             <AthleteCard3D 
               athlete={athlete} 
               onCardClick={handleCardClick}
+              onDeleteAthlete={handleDeleteAthlete}
             />
           </div>
         ))}
@@ -74,10 +83,11 @@ const AthleteGrid3D = () => {
       )}
 
       {selectedAthlete && (
-        <AthleteDetailsModal3D 
+        <AthleteDetailsPage 
           athlete={selectedAthlete}
-          category={selectedCategory}
-          onClose={handleCloseDetailsModal}
+          onClose={handleCloseDetailsPage}
+          onDeleteAthlete={handleDeleteAthlete}
+          onUpdateAthlete={handleUpdateAthlete}
         />
       )}
     </div>

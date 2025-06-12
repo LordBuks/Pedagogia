@@ -132,7 +132,7 @@
 
 /* Atualização do background para melhor integração com o design 3D */
 body {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: var(--inter-white);
   min-height: 100vh;
 }
 

@@ -35,7 +35,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #E30613 0%, #B8050F 50%, #8B040C 100%);
+  background: linear-gradient(135deg, #E30613 0%, #DC143C 50%, #B91C1C 100%);
   z-index: 1;
 }
 
@@ -46,11 +46,11 @@
   width: 100%;
   height: 100%;
   background-image: 
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
-    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
-    linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.05) 50%, transparent 60%);
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 2px, transparent 2px),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.15) 2px, transparent 2px),
+    linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.08) 50%, transparent 60%);
   background-size: 30px 30px, 30px 30px, 100% 100%;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .inter-logo {
@@ -319,5 +319,58 @@
   .athlete-card-3d:hover .card-inner {
     transform: rotateX(5deg) rotateY(5deg) translateZ(15px) scale(1.02);
   }
+}
+
+
+/* Botão de deletar */
+.delete-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.delete-button:hover {
+  background: #ff4757;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(255, 71, 87, 0.4);
+}
+
+.delete-button:active {
+  transform: scale(0.95);
+}
+
+/* Estilo para a média de avaliação */
+.athlete-rating {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.athlete-rating svg {
+  color: #FFD700;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
 
