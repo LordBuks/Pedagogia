@@ -8,23 +8,23 @@ const CategorySelector = () => {
   // Mapeamento de categorias para exibir apenas o nome da escola sem o turno
   const categoryMap = {
     'Turno Manhã - Escola São Francisco': {
-      displayName: 'Escola São Francisco',
+      displayName: 'Escola Padre Léo',
       turno: 'Manhã'
     },
     'Turno Manhã - Escola Estadual Padre Léo': {
-      displayName: 'Escola Estadual Padre Léo',
+      displayName: 'Escola São Francisco',
       turno: 'Manhã'
     },
     'Turno Noite - Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso': {
-      displayName: 'Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso',
+      displayName: 'Escola Gentil Viegas',
       turno: 'Noite'
     },
     'Turno Noite - Escola Estadual de Educação Básica Júlio César Ribeiro de Souza': {
-      displayName: 'Escola Estadual de Educação Básica Júlio César Ribeiro de Souza',
+      displayName: 'Escola Júlio César',
       turno: 'Noite'
     },
     'Turno Noite - E.M.E.F. Professor Juliano Nascimento': {
-      displayName: 'E.M.E.F. Professor Juliano Nascimento',
+      displayName: 'Escola Juliano Nascimento',
       turno: 'Noite'
     }
   };
@@ -37,19 +37,40 @@ const CategorySelector = () => {
     'Turno Noite - E.M.E.F. Professor Juliano Nascimento'
   ];
 
+  // Separar escolas por turno
+  const nightSchools = categories.filter(cat => cat.includes('Noite'));
+  const morningSchools = categories.filter(cat => cat.includes('Manhã'));
+
   return (
     <div className="category-selector">
       <div className="category-tabs">
-        {categories.map((category) => (
-          <button
-            key={category}
-            className={`category-tab ${selectedCategory === category ? 'active' : ''}`}
-            onClick={() => setSelectedCategory(category)}
-          >
-            <span className="category-text">{categoryMap[category].displayName}</span>
-            <span className="category-turno">{categoryMap[category].turno}</span>
-          </button>
-        ))}
+        {/* Escolas da noite em cima */}
+        <div className="night-schools">
+          {nightSchools.map((category) => (
+            <button
+              key={category}
+              className={`category-tab ${selectedCategory === category ? 'active' : ''}`}
+              onClick={() => setSelectedCategory(category)}
+            >
+              <span className="category-text">{categoryMap[category].displayName}</span>
+              <span className="category-turno">{categoryMap[category].turno}</span>
+            </button>
+          ))}
+        </div>
+        
+        {/* Escolas da manhã embaixo */}
+        <div className="morning-schools">
+          {morningSchools.map((category) => (
+            <button
+              key={category}
+              className={`category-tab ${selectedCategory === category ? 'active' : ''}`}
+              onClick={() => setSelectedCategory(category)}
+            >
+              <span className="category-text">{categoryMap[category].displayName}</span>
+              <span className="category-turno">{categoryMap[category].turno}</span>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

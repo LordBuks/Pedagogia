@@ -11,56 +11,54 @@ export const useAthletes = () => {
 };
 
 export const AthleteProvider = ({ children }) => {
-  const [athletes, setAthletes] = useState({
-    'Turno Manhã - Escola São Francisco': [],
-    'Turno Manhã - Escola Estadual Padre Léo': [],
-    'Turno Noite - Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso': [],
-    'Turno Noite - Escola Estadual de Educação Básica Júlio César Ribeiro de Souza': [],
-    'Turno Noite - E.M.E.F. Professor Juliano Nascimento': []
+  const [athletes, setAthletes] = useState(() => {
+    const defaultAthletesState = {
+      'Turno Manhã - Escola São Francisco': [],
+      'Turno Manhã - Escola Estadual Padre Léo': [],
+      'Turno Noite - Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso': [],
+      'Turno Noite - Escola Estadual de Educação Básica Júlio César Ribeiro de Souza': [],
+      'Turno Noite - E.M.E.F. Professor Juliano Nascimento': []
+    };
+
+    const savedAthletes = localStorage.getItem('internacional-athletes');
+    if (savedAthletes) {
+      try {
+        const parsedAthletes = JSON.parse(savedAthletes);
+        const initialState = { ...defaultAthletesState };
+        for (const category in parsedAthletes) {
+          if (Array.isArray(parsedAthletes[category])) {
+            initialState[category] = parsedAthletes[category];
+          } else {
+            console.warn(`AthleteContext: Categoria '${category}' no localStorage não é um array. Ignorando.`);
+          }
+        }
+        return initialState;
+      } catch (e) {
+        console.error('AthleteContext: Erro ao parsear localStorage:', e);
+        localStorage.removeItem('internacional-athletes'); // Limpa dados corrompidos
+        return defaultAthletesState;
+      }
+    }
+    return defaultAthletesState;
   });
   
   const [selectedCategory, setSelectedCategory] = useState('Turno Manhã - Escola São Francisco');
 
-  // Carregar dados do localStorage
-  useEffect(() => {
-    const savedAthletes = localStorage.getItem("internacional-athletes");
-    if (savedAthletes) {
-      try {
-        const parsedAthletes = JSON.parse(savedAthletes);
-        // Garante que o valor seja um objeto e não um array diretamente, para evitar o erro de iteração
-        if (typeof parsedAthletes === 'object' && parsedAthletes !== null) {
-          setAthletes(parsedAthletes);
-        } else {
-          console.error("Dados inválidos no localStorage, inicializando com objeto vazio.");
-          setAthletes({});
-        }
-      } catch (e) {
-        console.error("Erro ao analisar JSON do localStorage:", e);
-        setAthletes({}); // Inicializa com um objeto vazio em caso de erro de parsing
-      }
-    } else {
-      setAthletes({}); // Inicializa com um objeto vazio se não houver dados salvos
-    }
-  }, []);
-
-  // Salvar dados no localStorage
   useEffect(() => {
     localStorage.setItem('internacional-athletes', JSON.stringify(athletes));
   }, [athletes]);
 
   const addAthlete = (category, athlete) => {
-    const newAthlete = {
-      id: Date.now().toString(),
-      ...athlete,
-      createdAt: new Date().toISOString()
-    };
-    
+    console.log('AthleteContext: [addAthlete] Recebido - Categoria:', category, 'Atleta:', athlete); // Novo log
     setAthletes(prev => {
+      console.log('AthleteContext: [addAthlete] Estado anterior (prev):', prev); // Novo log
+      console.log('AthleteContext: [addAthlete] prev[category]:', prev[category]); // Novo log
+      const currentCategoryAthletes = Array.isArray(prev[category]) ? prev[category] : [];
       const newState = {
         ...prev,
-        [category]: [...prev[category], newAthlete]
+        [category]: [...currentCategoryAthletes, athlete]
       };
-      console.log("Atleta adicionado. Novo estado:", newState);
+      console.log('AthleteContext: [addAthlete] Novo estado:', newState); // Novo log
       return newState;
     });
   };
@@ -68,19 +66,13 @@ export const AthleteProvider = ({ children }) => {
   const updateAthlete = (updatedAthlete) => {
     setAthletes(prev => {
       const newState = { ...prev };
-      
-      // Encontrar em qual categoria o atleta está
       for (const category in newState) {
         const athleteIndex = newState[category].findIndex(athlete => athlete.id === updatedAthlete.id);
         if (athleteIndex !== -1) {
-          newState[category][athleteIndex] = { 
-            ...updatedAthlete, 
-            updatedAt: new Date().toISOString() 
-          };
+          newState[category][athleteIndex] = updatedAthlete;
           break;
         }
       }
-      
       return newState;
     });
   };
@@ -88,12 +80,9 @@ export const AthleteProvider = ({ children }) => {
   const deleteAthlete = (athleteId) => {
     setAthletes(prev => {
       const newState = { ...prev };
-      
-      // Encontrar em qual categoria o atleta está e removê-lo
       for (const category in newState) {
         newState[category] = newState[category].filter(athlete => athlete.id !== athleteId);
       }
-      
       return newState;
     });
   };
@@ -118,4 +107,5 @@ export const AthleteProvider = ({ children }) => {
     </AthleteContext.Provider>
   );
 };
+
 

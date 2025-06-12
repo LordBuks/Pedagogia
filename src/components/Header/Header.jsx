@@ -6,12 +6,14 @@ const Header = () => {
     <header className="header">
       <div className="header-content">
         <div className="logo-section">
-          <div className="logo-placeholder">
-            <span className="logo-text">SC</span>
-          </div>
+          <img 
+            src="/internacional-logo.png" 
+            alt="Sport Club Internacional" 
+            className="logo"
+          />
           <div className="title-section">
             <h1 className="main-title">Sport Club Internacional</h1>
-            <p className="subtitle">Categorias de Base</p>
+            <p className="subtitle">Departamento de Pedagogia da Categoria de Base</p>
           </div>
         </div>
       </div>
