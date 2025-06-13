@@ -8,11 +8,11 @@ const CategorySelector = () => {
   // Mapeamento de categorias para exibir apenas o nome da escola sem o turno
   const categoryMap = {
     'Turno Manhã - Escola São Francisco': {
-      displayName: 'Escola Padre Léo',
+      displayName: 'Escola São Francisco',
       turno: 'Manhã'
     },
     'Turno Manhã - Escola Estadual Padre Léo': {
-      displayName: 'Escola São Francisco',
+      displayName: 'Escola Padre Léo',
       turno: 'Manhã'
     },
     'Turno Noite - Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso': {
@@ -53,7 +53,6 @@ const CategorySelector = () => {
               onClick={() => setSelectedCategory(category)}
             >
               <span className="category-text">{categoryMap[category].displayName}</span>
-              <span className="category-turno">{categoryMap[category].turno}</span>
             </button>
           ))}
         </div>
@@ -67,7 +66,6 @@ const CategorySelector = () => {
               onClick={() => setSelectedCategory(category)}
             >
               <span className="category-text">{categoryMap[category].displayName}</span>
-              <span className="category-turno">{categoryMap[category].turno}</span>
             </button>
           ))}
         </div>

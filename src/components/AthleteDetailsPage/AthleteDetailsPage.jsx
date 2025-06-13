@@ -291,8 +291,8 @@ const AthleteDetailsPage = ({ athlete, onClose, onDeleteAthlete, onUpdateAthlete
                 'Compromisso'
               )}
               {renderTrophyRating(
-                editedAthlete.school || 0,
-                isEditing ? (value) => handleInputChange('school', value) : null,
+                editedAthlete.schoolRating || 0,
+                isEditing ? (value) => handleInputChange('schoolRating', value) : null,
                 'Escola'
               )}
             </div>

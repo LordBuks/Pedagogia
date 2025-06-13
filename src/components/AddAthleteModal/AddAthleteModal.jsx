@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
-import { X, Upload, User } from 'lucide-react';
+import { X, Upload, User, Trophy } from 'lucide-react';
 import { useAthletes } from '../../context/AthleteContext';
 import './AddAthleteModal.css';
 
 const AddAthleteModal = ({ category, onClose }) => {
   const { addAthlete } = useAthletes();
   const [formData, setFormData] = useState({
+    id: Date.now().toString(),
     name: '',
     fullName: '',
     birthDate: '',
+    birthPlace: '',
     position: '',
-    naturalidade: '',
     photo: null,
-    schoolYear: '', // Mantendo schoolYear
-    evaluation: {
-      comportamento: 5,
-      compromisso: 5,
-      escola: 5
-    }
+    school: '',
+    schoolYear: '',
+    observations: '',
+    schoolProgress: '',
+    improvementPoints: '',
+    behavior: 3,
+    commitment: 3,
+    schoolRating: 3,
+    category: category
   });
 
   const [errors, setErrors] = useState({});
@@ -60,13 +64,10 @@ const AddAthleteModal = ({ category, onClose }) => {
     }
   };
 
-  const handleEvaluationChange = (field, value) => {
+  const handleRatingChange = (field, value) => {
     setFormData(prev => ({
       ...prev,
-      evaluation: {
-        ...prev.evaluation,
-        [field]: parseInt(value)
-      }
+      [field]: parseInt(value)
     }));
   };
 
@@ -91,20 +92,12 @@ const AddAthleteModal = ({ category, onClose }) => {
       newErrors.name = 'Nome é obrigatório';
     }
     
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Nome completo é obrigatório';
-    }
-    
     if (!formData.birthDate) {
       newErrors.birthDate = 'Data de nascimento é obrigatória';
     }
     
     if (!formData.position) {
       newErrors.position = 'Posição é obrigatória';
-    }
-    
-    if (!formData.schoolYear) {
-      newErrors.schoolYear = 'Ano escolar é obrigatório';
     }
 
     setErrors(newErrors);
@@ -115,17 +108,39 @@ const AddAthleteModal = ({ category, onClose }) => {
     e.preventDefault();
     
     if (validateForm()) {
-      // A categoria já é passada como prop para o modal
+      console.log('AddAthleteModal: [handleSubmit] Dados do formulário:', formData);
+      console.log('AddAthleteModal: [handleSubmit] Categoria:', category);
       addAthlete(category, formData);
       onClose();
     }
+  };
+
+  const renderTrophyRating = (value, onChange, label) => {
+    return (
+      <div className="trophy-rating">
+        <label className="rating-label">{label}</label>
+        <div className="trophy-container">
+          {[1, 2, 3, 4, 5].map((rating) => (
+            <button
+              key={rating}
+              type="button"
+              className={`trophy-button ${value >= rating ? 'active' : ''}`}
+              onClick={() => onChange(rating)}
+            >
+              <Trophy size={16} />
+            </button>
+          ))}
+          <span className="rating-value">{value}/5</span>
+        </div>
+      </div>
+    );
   };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h2 className="modal-title">Adicionar Atleta - {category}</h2>
+          <h2 className="modal-title">Adicionar Atleta</h2>
           <button className="close-button" onClick={onClose}>
             <X size={24} />
           </button>
@@ -164,20 +179,20 @@ const AddAthleteModal = ({ category, onClose }) => {
                   value={formData.name}
                   onChange={handleInputChange}
                   className={errors.name ? 'error' : ''}
+                  placeholder="Nome do atleta"
                 />
                 {errors.name && <span className="error-message">{errors.name}</span>}
               </div>
 
               <div className="form-group">
-                <label>Nome Completo *</label>
+                <label>Nome Completo</label>
                 <input
                   type="text"
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleInputChange}
-                  className={errors.fullName ? 'error' : ''}
+                  placeholder="Nome completo do atleta"
                 />
-                {errors.fullName && <span className="error-message">{errors.fullName}</span>}
               </div>
 
               <div className="form-group">
@@ -190,6 +205,17 @@ const AddAthleteModal = ({ category, onClose }) => {
                   className={errors.birthDate ? 'error' : ''}
                 />
                 {errors.birthDate && <span className="error-message">{errors.birthDate}</span>}
+              </div>
+
+              <div className="form-group">
+                <label>Local de Nascimento</label>
+                <input
+                  type="text"
+                  name="birthPlace"
+                  value={formData.birthPlace}
+                  onChange={handleInputChange}
+                  placeholder="Cidade/Estado de nascimento"
+                />
               </div>
 
               <div className="form-group">
@@ -210,74 +236,84 @@ const AddAthleteModal = ({ category, onClose }) => {
             </div>
 
             <div className="form-right">
-              {/* Removido: Admissão no Alojamento */}
-
-              {/* Removido: Escola que Estuda */}
+              <div className="form-group">
+                <label>Escola que Estuda</label>
+                <input
+                  type="text"
+                  name="school"
+                  value={formData.school}
+                  onChange={handleInputChange}
+                  placeholder="Nome da escola"
+                />
+              </div>
 
               <div className="form-group">
-                <label>Ano que Estuda *</label>
+                <label>Ano que Estuda</label>
                 <select
                   name="schoolYear"
                   value={formData.schoolYear}
                   onChange={handleInputChange}
-                  className={errors.schoolYear ? 'error' : ''}
                 >
                   <option value="">Selecione o ano</option>
                   {schoolYears.map(year => (
                     <option key={year} value={year}>{year}</option>
                   ))}
                 </select>
-                {errors.schoolYear && <span className="error-message">Ano escolar é obrigatório</span>}
               </div>
 
               <div className="form-group">
-                <label>Naturalidade *</label>
-                <input
-                  type="text"
-                  name="naturalidade"
-                  value={formData.naturalidade}
+                <label>Observações sobre o atleta</label>
+                <textarea
+                  name="observations"
+                  value={formData.observations}
                   onChange={handleInputChange}
+                  placeholder="Observações gerais sobre o atleta..."
+                  rows={3}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Andamento escolar</label>
+                <textarea
+                  name="schoolProgress"
+                  value={formData.schoolProgress}
+                  onChange={handleInputChange}
+                  placeholder="Informações sobre o desempenho escolar..."
+                  rows={3}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Pontos a reforçar</label>
+                <textarea
+                  name="improvementPoints"
+                  value={formData.improvementPoints}
+                  onChange={handleInputChange}
+                  placeholder="Pontos que precisam ser trabalhados..."
+                  rows={3}
                 />
               </div>
 
               <div className="evaluation-section">
                 <h3>Avaliação Inicial</h3>
                 
-                <div className="evaluation-item">
-                  <label>Comportamento: {formData.evaluation.comportamento}/10</label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="10"
-                    value={formData.evaluation.comportamento}
-                    onChange={(e) => handleEvaluationChange('comportamento', e.target.value)}
-                    className="evaluation-slider"
-                  />
-                </div>
+                {renderTrophyRating(
+                  formData.behavior,
+                  (value) => handleRatingChange('behavior', value),
+                  'Comportamento'
+                )}
 
-                <div className="evaluation-item">
-                  <label>Compromisso: {formData.evaluation.compromisso}/10</label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="10"
-                    value={formData.evaluation.compromisso}
-                    onChange={(e) => handleEvaluationChange('compromisso', e.target.value)}
-                    className="evaluation-slider"
-                  />
-                </div>
+                {renderTrophyRating(
+                  formData.commitment,
+                  (value) => handleRatingChange('commitment', value),
+                  'Compromisso'
+                )}
 
-                <div className="evaluation-item">
-                  <label>Escola: {formData.evaluation.escola}/10</label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="10"
-                    value={formData.evaluation.escola}
-                    onChange={(e) => handleEvaluationChange('escola', e.target.value)}
-                    className="evaluation-slider"
-                  />
-                </div>
+                {renderTrophyRating(
+                  formData.schoolRating,
+                  (value) => handleRatingChange('schoolRating', value),
+                  'Escola'
+                )}
               </div>
             </div>
           </div>
@@ -297,5 +333,4 @@ const AddAthleteModal = ({ category, onClose }) => {
 };
 
 export default AddAthleteModal;
-
 
