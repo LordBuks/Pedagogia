@@ -489,3 +489,101 @@
   }
 }
 
+
+/* Estilos para os botões das seções de observação */
+.observation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.observation-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn-small,
+.save-btn-small,
+.cancel-btn-small,
+.delete-btn-small {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.edit-btn-small {
+  background: #3B82F6;
+  color: white;
+}
+
+.edit-btn-small:hover {
+  background: #2563EB;
+  transform: translateY(-1px);
+}
+
+.save-btn-small {
+  background: #10B981;
+  color: white;
+}
+
+.save-btn-small:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.cancel-btn-small {
+  background: #6B7280;
+  color: white;
+}
+
+.cancel-btn-small:hover {
+  background: #4B5563;
+  transform: translateY(-1px);
+}
+
+.delete-btn-small {
+  background: #EF4444;
+  color: white;
+}
+
+.delete-btn-small:hover {
+  background: #DC2626;
+  transform: translateY(-1px);
+}
+
+/* Responsividade para os botões pequenos */
+@media (max-width: 768px) {
+  .observation-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .observation-buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .observation-buttons {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  
+  .edit-btn-small,
+  .save-btn-small,
+  .cancel-btn-small,
+  .delete-btn-small {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+}
+

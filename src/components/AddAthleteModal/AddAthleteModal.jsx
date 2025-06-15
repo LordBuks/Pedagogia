@@ -13,7 +13,7 @@ const AddAthleteModal = ({ category, onClose }) => {
     birthPlace: '',
     position: '',
     photo: null,
-    school: '',
+
     schoolYear: '',
     observations: '',
     schoolProgress: '',
@@ -236,16 +236,7 @@ const AddAthleteModal = ({ category, onClose }) => {
             </div>
 
             <div className="form-right">
-              <div className="form-group">
-                <label>Escola que Estuda</label>
-                <input
-                  type="text"
-                  name="school"
-                  value={formData.school}
-                  onChange={handleInputChange}
-                  placeholder="Nome da escola"
-                />
-              </div>
+
 
               <div className="form-group">
                 <label>Ano que Estuda</label>
