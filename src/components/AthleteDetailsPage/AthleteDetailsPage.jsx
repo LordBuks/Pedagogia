@@ -6,6 +6,11 @@ const AthleteDetailsPage = ({ athlete, onClose, onDeleteAthlete, onUpdateAthlete
   const [isEditing, setIsEditing] = useState(false);
   const [editedAthlete, setEditedAthlete] = useState({ ...athlete });
   const [imageError, setImageError] = useState(false);
+  
+  // Estados individuais para edição de cada seção
+  const [isEditingObservations, setIsEditingObservations] = useState(false);
+  const [isEditingSchoolProgress, setIsEditingSchoolProgress] = useState(false);
+  const [isEditingImprovementPoints, setIsEditingImprovementPoints] = useState(false);
 
   useEffect(() => {
     // Adiciona classe ao body para esconder o scroll
@@ -28,6 +33,63 @@ const AthleteDetailsPage = ({ athlete, onClose, onDeleteAthlete, onUpdateAthlete
       ...prev,
       [field]: value
     }));
+  };
+
+  // Funções para salvar seções individuais
+  const handleSaveObservations = () => {
+    onUpdateAthlete(editedAthlete);
+    setIsEditingObservations(false);
+  };
+
+  const handleSaveSchoolProgress = () => {
+    onUpdateAthlete(editedAthlete);
+    setIsEditingSchoolProgress(false);
+  };
+
+  const handleSaveImprovementPoints = () => {
+    onUpdateAthlete(editedAthlete);
+    setIsEditingImprovementPoints(false);
+  };
+
+  // Funções para cancelar edição de seções individuais
+  const handleCancelObservations = () => {
+    setEditedAthlete(prev => ({ ...prev, observations: athlete.observations }));
+    setIsEditingObservations(false);
+  };
+
+  const handleCancelSchoolProgress = () => {
+    setEditedAthlete(prev => ({ ...prev, schoolProgress: athlete.schoolProgress }));
+    setIsEditingSchoolProgress(false);
+  };
+
+  const handleCancelImprovementPoints = () => {
+    setEditedAthlete(prev => ({ ...prev, improvementPoints: athlete.improvementPoints }));
+    setIsEditingImprovementPoints(false);
+  };
+
+  // Funções para deletar conteúdo de seções individuais
+  const handleDeleteObservations = () => {
+    if (window.confirm('Tem certeza que deseja deletar as observações?')) {
+      const updatedAthlete = { ...editedAthlete, observations: '' };
+      setEditedAthlete(updatedAthlete);
+      onUpdateAthlete(updatedAthlete);
+    }
+  };
+
+  const handleDeleteSchoolProgress = () => {
+    if (window.confirm('Tem certeza que deseja deletar o andamento escolar?')) {
+      const updatedAthlete = { ...editedAthlete, schoolProgress: '' };
+      setEditedAthlete(updatedAthlete);
+      onUpdateAthlete(updatedAthlete);
+    }
+  };
+
+  const handleDeleteImprovementPoints = () => {
+    if (window.confirm('Tem certeza que deseja deletar os pontos a reforçar?')) {
+      const updatedAthlete = { ...editedAthlete, improvementPoints: '' };
+      setEditedAthlete(updatedAthlete);
+      onUpdateAthlete(updatedAthlete);
+    }
   };
 
   const handleSave = () => {
@@ -182,22 +244,7 @@ const AthleteDetailsPage = ({ athlete, onClose, onDeleteAthlete, onUpdateAthlete
               )}
             </div>
 
-            <div className="detail-item">
-              <label>Escola que Estuda</label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={editedAthlete.school || ''}
-                  onChange={(e) => handleInputChange('school', e.target.value)}
-                  className="detail-input"
-                  placeholder="Nome da escola"
-                />
-              ) : (
-                <div className="detail-value">
-                  {athlete.school || 'Não informado'}
-                </div>
-              )}
-            </div>
+
 
             <div className="detail-item">
               <label>Ano que Estuda</label>
@@ -226,8 +273,31 @@ const AthleteDetailsPage = ({ athlete, onClose, onDeleteAthlete, onUpdateAthlete
 
           <div className="observations-section">
             <div className="observation-field">
-              <label>Observações sobre o atleta</label>
-              {isEditing ? (
+              <div className="observation-header">
+                <label>Observações sobre o atleta</label>
+                <div className="observation-buttons">
+                  {isEditingObservations ? (
+                    <>
+                      <button className="save-btn-small" onClick={handleSaveObservations}>
+                        Salvar
+                      </button>
+                      <button className="cancel-btn-small" onClick={handleCancelObservations}>
+                        Cancelar
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button className="edit-btn-small" onClick={() => setIsEditingObservations(true)}>
+                        Editar
+                      </button>
+                      <button className="delete-btn-small" onClick={handleDeleteObservations}>
+                        Deletar
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
+              {isEditingObservations ? (
                 <textarea
                   value={editedAthlete.observations || ''}
                   onChange={(e) => handleInputChange('observations', e.target.value)}
@@ -243,8 +313,31 @@ const AthleteDetailsPage = ({ athlete, onClose, onDeleteAthlete, onUpdateAthlete
             </div>
 
             <div className="observation-field">
-              <label>Andamento escolar</label>
-              {isEditing ? (
+              <div className="observation-header">
+                <label>Andamento escolar</label>
+                <div className="observation-buttons">
+                  {isEditingSchoolProgress ? (
+                    <>
+                      <button className="save-btn-small" onClick={handleSaveSchoolProgress}>
+                        Salvar
+                      </button>
+                      <button className="cancel-btn-small" onClick={handleCancelSchoolProgress}>
+                        Cancelar
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button className="edit-btn-small" onClick={() => setIsEditingSchoolProgress(true)}>
+                        Editar
+                      </button>
+                      <button className="delete-btn-small" onClick={handleDeleteSchoolProgress}>
+                        Deletar
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
+              {isEditingSchoolProgress ? (
                 <textarea
                   value={editedAthlete.schoolProgress || ''}
                   onChange={(e) => handleInputChange('schoolProgress', e.target.value)}
@@ -260,8 +353,31 @@ const AthleteDetailsPage = ({ athlete, onClose, onDeleteAthlete, onUpdateAthlete
             </div>
 
             <div className="observation-field">
-              <label>Pontos a reforçar</label>
-              {isEditing ? (
+              <div className="observation-header">
+                <label>Pontos a reforçar</label>
+                <div className="observation-buttons">
+                  {isEditingImprovementPoints ? (
+                    <>
+                      <button className="save-btn-small" onClick={handleSaveImprovementPoints}>
+                        Salvar
+                      </button>
+                      <button className="cancel-btn-small" onClick={handleCancelImprovementPoints}>
+                        Cancelar
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button className="edit-btn-small" onClick={() => setIsEditingImprovementPoints(true)}>
+                        Editar
+                      </button>
+                      <button className="delete-btn-small" onClick={handleDeleteImprovementPoints}>
+                        Deletar
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
+              {isEditingImprovementPoints ? (
                 <textarea
                   value={editedAthlete.improvementPoints || ''}
                   onChange={(e) => handleInputChange('improvementPoints', e.target.value)}
