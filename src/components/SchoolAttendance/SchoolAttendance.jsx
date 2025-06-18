@@ -205,7 +205,7 @@ const SchoolAttendance = () => {
           <Calendar size={32} />
           <div>
             <h1>Chamada Escolar</h1>
-            <p>Controle de presença mensal por escola</p>
+            <p>Controle de presença mensal</p>
           </div>
         </div>
         
