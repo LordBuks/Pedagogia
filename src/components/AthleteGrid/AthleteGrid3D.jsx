@@ -27,8 +27,8 @@ const AthleteGrid3D = () => {
       displayName: 'Escola Estadual Padre Léo',
       turno: 'Manhã'
     },
-    'Turno Noite - Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso': {
-      displayName: 'Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso',
+    'Turno Noite - Escola Estadual de Educação Básica Gentil Viegas Cardoso': {
+      displayName: 'Escola Estadual de Educação Básica Gentil Viegas Cardoso',
       turno: 'Noite'
     },
     'Turno Noite - Escola Estadual de Educação Básica Júlio César Ribeiro de Souza': {
