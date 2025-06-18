@@ -15,7 +15,7 @@ const CategorySelector = () => {
       displayName: 'Escola Padre Léo',
       turno: 'Manhã'
     },
-    'Turno Noite - Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso': {
+    'Turno Noite - Escola Estadual de Educação Básica Gentil Viegas Cardoso': {
       displayName: 'Escola Gentil Viegas',
       turno: 'Noite'
     },
@@ -32,7 +32,7 @@ const CategorySelector = () => {
   const categories = [
     'Turno Manhã - Escola São Francisco', 
     'Turno Manhã - Escola Estadual Padre Léo', 
-    'Turno Noite - Escola Professor Estadual de Educação Básica Gentil Viegas Cardoso', 
+    'Turno Noite - Escola Estadual de Educação Básica Gentil Viegas Cardoso', 
     'Turno Noite - Escola Estadual de Educação Básica Júlio César Ribeiro de Souza', 
     'Turno Noite - E.M.E.F. Professor Juliano Nascimento'
   ];
