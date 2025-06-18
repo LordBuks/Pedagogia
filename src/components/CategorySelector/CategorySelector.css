@@ -33,13 +33,12 @@
 
 .category-tab {
   background: linear-gradient(145deg, #ffffff, #f8f9fa);
-  border: 2px solid rgba(220, 53, 69, 0.2);
+  border: 2px solid rgba(0, 0, 0, 0.4);
   border-radius: 15px;
   padding: 1rem 1.5rem;
-  color: #dc3545;
+  color: #333;
   cursor: pointer;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
   width: 220px; /* Largura fixa para todos os botões */
   height: 80px; /* Altura fixa para todos os botões */
   text-align: center;
@@ -138,4 +137,5 @@
     font-size: 0.9rem;
   }
 }
+
 
