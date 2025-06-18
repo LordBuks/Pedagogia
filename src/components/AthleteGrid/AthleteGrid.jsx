@@ -45,7 +45,7 @@ const AthleteGrid = () => {
               <Plus size={48} />
             </div>
             <h3 className="add-card-title">Adicionar Atleta</h3>
-            <p className="add-card-subtitle">Clique para cadastrar um novo atleta na categoria {selectedCategory}</p>
+            <p className="add-card-subtitle">Clique para cadastrar um novo atleta na {selectedCategory}</p>
           </div>
         </div>
       </div>

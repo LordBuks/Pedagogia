@@ -99,7 +99,7 @@ const AthleteGrid3D = () => {
               </div>
               <h3 className="add-card-title">Adicionar Atleta</h3>
               <p className="add-card-subtitle">
-                Clique para cadastrar um novo atleta na categoria {categoryMap[selectedCategory].displayName}
+                Clique para cadastrar um novo atleta na {categoryMap[selectedCategory].displayName}
               </p>
             </div>
           </div>
