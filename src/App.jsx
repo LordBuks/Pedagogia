@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AthleteProvider } from './context/AthleteContext';
+import { AthleteProvider } from './context/AthleteContextFirebase';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Header from './components/Header/Header';
 import CategorySelector from './components/CategorySelector/CategorySelector';

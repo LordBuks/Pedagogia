@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Plus } from 'lucide-react';
-import { useAthletes } from '../../context/AthleteContext';
+import { useAthletes } from '../../context/AthleteContextFirebase';
 import AthleteCard3D from '../AthleteCard/AthleteCard3D';
 import AddAthleteModal from '../AddAthleteModal/AddAthleteModal';
 import AthleteDetailsPage from '../AthleteDetailsPage/AthleteDetailsPage';

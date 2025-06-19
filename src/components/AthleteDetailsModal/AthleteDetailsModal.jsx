@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Edit, Trash2, User, Calendar, MapPin, GraduationCap, School } from 'lucide-react';
-import { useAthletes } from '../../context/AthleteContext';
+import { useAthletes } from '../../context/AthleteContextFirebase';
 import './AthleteDetailsModal.css';
 
 const AthleteDetailsModal = ({ athlete, category, onClose }) => {

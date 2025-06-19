@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Upload, User, Trophy } from 'lucide-react';
-import { useAthletes } from '../../context/AthleteContext';
+import { useAthletes } from '../../context/AthleteContextFirebase';
 import './AddAthleteModal.css';
 
 const AddAthleteModal = ({ category, onClose }) => {

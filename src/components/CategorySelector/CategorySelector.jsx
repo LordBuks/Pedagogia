@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAthletes } from '../../context/AthleteContext';
+import { useAthletes } from '../../context/AthleteContextFirebase';
 import './CategorySelector.css';
 
 const CategorySelector = () => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Download, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useAthletes } from '../../context/AthleteContext';
+import { useAthletes } from '../../context/AthleteContextFirebase';
 import './SchoolAttendance.css';
 
 const SchoolAttendance = () => {
