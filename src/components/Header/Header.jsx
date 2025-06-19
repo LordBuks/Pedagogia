@@ -1,7 +1,10 @@
 import React from 'react';
+import { useAuth } from '../../context/AuthContext';
 import './Header.css';
 
 const Header = () => {
+  const { currentUser } = useAuth();
+
   return (
     <header className="header">
       <div className="header-content">
@@ -16,6 +19,11 @@ const Header = () => {
             <p className="subtitle">Departamento de Pedagogia da Categoria de Base</p>
           </div>
         </div>
+        {currentUser && (
+          <div className="user-info">
+            <span className="user-email">{currentUser.email}</span>
+          </div>
+        )}
       </div>
     </header>
   );

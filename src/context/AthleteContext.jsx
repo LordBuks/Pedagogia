@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { addAthlete as addAthleteToFirebase } from '../services/athleteService'; // Importe a função do serviço
 
 const AthleteContext = createContext();
 
@@ -19,7 +20,6 @@ export const AthleteProvider = ({ children }) => {
       'Turno Noite - Escola Estadual de Educação Básica Júlio César Ribeiro de Souza': [],
       'Turno Noite - E.M.E.F. Professor Juliano Nascimento': []
     };
-
     const savedAthletes = localStorage.getItem('internacional-athletes');
     if (savedAthletes) {
       try {
@@ -41,26 +41,31 @@ export const AthleteProvider = ({ children }) => {
     }
     return defaultAthletesState;
   });
-  
+
   const [selectedCategory, setSelectedCategory] = useState('Turno Manhã - Escola São Francisco');
 
   useEffect(() => {
     localStorage.setItem('internacional-athletes', JSON.stringify(athletes));
   }, [athletes]);
 
-  const addAthlete = (category, athlete) => {
-    console.log('AthleteContext: [addAthlete] Recebido - Categoria:', category, 'Atleta:', athlete); // Novo log
-    setAthletes(prev => {
-      console.log('AthleteContext: [addAthlete] Estado anterior (prev):', prev); // Novo log
-      console.log('AthleteContext: [addAthlete] prev[category]:', prev[category]); // Novo log
-      const currentCategoryAthletes = Array.isArray(prev[category]) ? prev[category] : [];
-      const newState = {
-        ...prev,
-        [category]: [...currentCategoryAthletes, athlete]
-      };
-      console.log('AthleteContext: [addAthlete] Novo estado:', newState); // Novo log
-      return newState;
-    });
+  const addAthlete = async (category, athlete) => { // Torne a função assíncrona
+    console.log('AthleteContext: [addAthlete] Recebido - Categoria:', category, 'Atleta:', athlete);
+
+    try {
+      // Salva no Firebase
+      const newAthleteWithId = await addAthleteToFirebase(athlete); // Chama a função do serviço
+      
+      // Atualiza o estado local com o atleta retornado pelo Firebase (que terá o ID gerado)
+      setAthletes(prev => {
+        const currentCategoryAthletes = Array.isArray(prev[category]) ? prev[category] : [];
+        const newState = { ...prev, [category]: [...currentCategoryAthletes, newAthleteWithId] };
+        return newState;
+      });
+      console.log('Atleta salvo no Firebase e atualizado no estado local:', newAthleteWithId);
+    } catch (error) {
+      console.error('Erro ao adicionar atleta:', error);
+      // Você pode adicionar um feedback visual para o usuário aqui, se desejar
+    }
   };
 
   const updateAthlete = (updatedAthlete) => {
@@ -107,5 +112,3 @@ export const AthleteProvider = ({ children }) => {
     </AthleteContext.Provider>
   );
 };
-
-
